@@ -1,0 +1,19 @@
+# Dependencies — reinstalled inside the image via npm ci
+node_modules
+client/node_modules
+server/node_modules
+
+# Local environment files — secrets must come from Render/Docker env vars
+.env
+client/.env
+server/.env
+client/.env.local
+server/.env.local
+
+# LevelDB on-disk storage — not needed in the image
+server/layer-storage
+
+# Dev/build artifacts that aren't needed at runtime
+client/dist
+**/.DS_Store
+**/*.log
