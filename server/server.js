@@ -83,7 +83,11 @@ app.use('/api/run', runLimiter, runRouter);
 if (IS_PRODUCTION) {
   const clientDist = path.join(__dirname, '..', 'client', 'dist');
   app.use(express.static(clientDist));
-  app.get(/^(?!\/api|\/ws).*/, (req, res) => {
+  // SPA fallback — send index.html for any non-API route
+  app.use((req, res, next) => {
+    if (req.path.startsWith('/api') || req.path.startsWith('/ws')) {
+      return next();
+    }
     res.sendFile(path.join(clientDist, 'index.html'));
   });
 }
