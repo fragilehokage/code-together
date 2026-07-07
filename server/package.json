@@ -1,0 +1,33 @@
+{
+  "name": "collaborative-ide-server",
+  "version": "1.0.0",
+  "description": "Real-time collaborative IDE backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "collaborative",
+    "ide",
+    "yjs",
+    "websocket"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "axios": "^1.18.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^7.5.0",
+    "mongodb": "^7.4.0",
+    "ws": "^8.21.0",
+    "yjs": "^13.6.31"
+  }
+}
