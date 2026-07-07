@@ -4,6 +4,12 @@ services:
     runtime: docker
     plan: free
     healthCheckPath: /api/health
+    # Required for WebSocket support on Render
+    # The Connection and Upgrade headers must be forwarded
+    headers:
+      - path: /ws
+        name: Connection
+        value: Upgrade
     envVars:
       - key: NODE_ENV
         value: production
