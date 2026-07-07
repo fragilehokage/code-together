@@ -82,10 +82,17 @@ app.use('/api/run', runLimiter, runRouter);
 // ── Serve built client in production ─────────────────────────────────────────
 if (IS_PRODUCTION) {
   const clientDist = path.join(__dirname, '..', 'client', 'dist');
-  app.use(express.static(clientDist));
-  // SPA fallback — send index.html for any non-API route
+
+  // Serve static assets with correct MIME types
+  app.use(express.static(clientDist, { index: false }));
+
+  // SPA fallback — only for non-API, non-asset routes
   app.use((req, res, next) => {
-    if (req.path.startsWith('/api') || req.path.startsWith('/ws')) {
+    if (
+      req.path.startsWith('/api') ||
+      req.path.startsWith('/ws') ||
+      req.path.match(/\.(js|css|png|jpg|jpeg|svg|ico|json|woff|woff2|ttf|map)$/)
+    ) {
       return next();
     }
     res.sendFile(path.join(clientDist, 'index.html'));
